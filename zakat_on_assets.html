@@ -140,7 +140,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </div>
                 <div class="card-body">
                   <div class="row">
-                    <div class="col-sm-6">
+                    <div class="col-sm-6 pt-2">
                       <div class="row">
                         <div class="col-sm-4">
                           <!-- <div class="form-group" style="display: inline-flex;"> -->
@@ -265,14 +265,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
   </div>
           </div> -->
           </div>
-            <div class="pb-4">
-              <a class="btn btn-primary col-sm-4" href="" >Calculate Zakat</a>
+            <div class="pb-4" style="text-align: center;">
+              <a class="btn btn-primary col-sm-4" id="zakat_calculate" style=" margin: 0 auto;" onclick="zakat_calculate()">Calculate Zakat</a>
             </div>
-            <div class="row">
-              <div class="col-sm-6">
+            <div class="row" style="text-align: center;">
+              <div class="col-sm-6" style=" margin: 0 auto;">
                 <div class="row">
                   <div class="col-sm-6">
-                    <h3>
+                    <h3 style="text-align: center;">
                       Total Net Worth: 
                     </h3>
                   </div>
@@ -282,15 +282,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </div>
               </div>
             </div>
-            <div class="row">
-              <div class="col-sm-6">
+            <div class="row" style="text-align: center;">
+              <div class="col-sm-6" style="margin: 0 auto;">
                 <div class="row">
                   <div class="col-sm-6">
-                    <h3>
+                    <h3 style="text-align: center;">
                       Zakat Payable: 
                     </h3>
                   </div>
-                  <div class="col-sm-6">
+                  <div class="col-sm-6" style=" margin: 0 auto;">
                     <h3 style="font-weight: bold; color: green;">Rs. <span id="zakat_payable" style="font-weight: bold; color: green;">0</span></h3>
                   </div>
                 </div>
@@ -406,6 +406,9 @@ var zakat_payable = document.getElementById('zakat_payable');
 //    })
 
 // }
+
+
+/*
 var test = document.getElementsByClassName("form-control");
 var net_amount = 0;
 var old_value = 0;
@@ -444,6 +447,30 @@ zakat_payable.textContent = zakat_amount;
 });
 
 
+}
+*/
+function zakat_calculate(){
+  // alert('Allah!');
+  var test = document.getElementsByClassName("form-control");
+var net_amount = 0;
+var old_value = 0;
+var amount = 0;
+var zakat_amount = 0;
+for (let index = 0; index < test.length; index++) {
+  if(test[index].classList.contains('liability')){
+  amount -= Number(test[index].value);
+}else{
+  amount += Number(test[index].value);
+}
+}
+if (amount >= 125693.0136) {
+  zakat_amount = (amount)/100 * 2.5;
+}else{
+  alert('You amount is less than nisab.Therefore Zakat is not payable');
+}
+
+net_worth.textContent = amount;
+zakat_payable.textContent = zakat_amount;
 }
 </script>
 </body>
